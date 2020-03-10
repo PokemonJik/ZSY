@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wangj.testproject">
+    <!-- if you want to load images from the internet -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- if you want to load images from a file OR from the internet -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".fyfb"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".zfrz" />
+        <activity android:name=".login2" />
+        <activity android:name=".gr" />
+        <activity android:name=".fy" />
+        <activity android:name=".grxx" />
+        <activity android:name=".tj" />
+        <activity android:name=".userLogin" />
+        <activity android:name=".user_register" />
+        <activity android:name=".xqfb" />
+        <activity android:name=".gwc" />
+        <activity android:name=".fwxq" />
+        <activity
+            android:name=".fyuploadimg"
+            android:theme="@style/MyToolsAddAvatar" />
+        <activity
+            android:name=".uploadimg"
+            android:theme="@style/MyToolsAddAvatar" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.wangj.testproject.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
+</manifest>

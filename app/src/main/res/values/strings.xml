@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">找舍友</string>
+    <string name="menu_edit">编辑</string>
+    <string name="menu_enter">完成</string>
+    <string name="menu_del">删除</string>
+    <string name="menu_sett">结算</string>
+    <string name="action_settings">配置服务器</string>
+    <string name="editTextString">192.168.169.166</string>
+</resources>
