@@ -50,6 +50,7 @@ public class xqfb extends AppCompatActivity {
         demand = findViewById(R.id.E1);
         introduce = findViewById(R.id.E2);
         tj = findViewById(R.id.B1);
+        Looper.prepare();
         demand.setText(message[0]);
         introduce.setText(message[1]);
         tj.setText("修改");
@@ -58,12 +59,9 @@ public class xqfb extends AppCompatActivity {
             public void onClick(View view) {
                 Thread thread = new Thread(runff);
                 thread.start();
-
             }
         });
-
-
-
+        Looper.loop();
 //        tj.setOnClickListener(new View.OnClickListener(){
 //            @Override
 //            public void onClick(View view) {
@@ -84,7 +82,6 @@ public class xqfb extends AppCompatActivity {
             public void onClick(View view) {
                 Thread thread = new Thread(runnable);
                 thread.start();
-
             }
         });
     }
@@ -95,23 +92,22 @@ public class xqfb extends AppCompatActivity {
             Http_xqfb httpxqfb = new Http_xqfb();
             String Demand = demand.getText().toString();
             String Introduce = introduce.getText().toString();
-//            demand.setText(Demand);
-//            introduce.setText(Introduce);
             String connectURL = "http://"+url.URL+"/xqfb.php";
             flag = httpxqfb.gotoConn(a,Demand,Introduce,connectURL);
             if(flag==1){
                 Intent intent = new Intent(xqfb.this,gr.class);
                 startActivity(intent);
                 Looper.prepare();
-                Toast.makeText(xqfb.this,"住房需求更新成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(xqfb.this,"住房需求发布成功",Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }else{
                 Looper.prepare();
-                Toast.makeText(xqfb.this,"住房需求更新失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(xqfb.this,"住房需求发布失败",Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
         }
     };
+
     Runnable runf = new Runnable() {
         @Override
         public void run() {
@@ -140,11 +136,11 @@ public class xqfb extends AppCompatActivity {
                 Intent intent = new Intent(xqfb.this, gr.class);
                 startActivity(intent);
                 Looper.prepare();
-                Toast.makeText(xqfb.this, "住房需求发布成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(xqfb.this, "住房需求更新成功", Toast.LENGTH_SHORT).show();
                 Looper.loop();
             } else {
                 Looper.prepare();
-                Toast.makeText(xqfb.this, "住房需求发布失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(xqfb.this, "住房需求更新失败", Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
         }
