@@ -23,8 +23,7 @@
     <ImageView
         android:id="@+id/zf_pic"
         android:layout_width="match_parent"
-        android:layout_height="308dp"
-        />
+        android:layout_height="240dp" />
 
     <View
         android:layout_width="fill_parent"
@@ -48,10 +47,16 @@
     <TextView
         android:id="@+id/fwjj"
         android:layout_width="match_parent"
-        android:layout_height="158dp"
+        android:layout_height="98dp"
         android:text="房屋简介"
         android:textSize="26sp" />
 
+    <TextView
+        android:id="@+id/demand"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:text="要求"
+        android:textSize="26sp" />
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"

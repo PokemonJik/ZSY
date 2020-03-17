@@ -29,6 +29,7 @@ public class fwxq extends Activity {
     TextView uname;
     TextView hname;
     TextView intro;
+    TextView dm;
     String username;
     String housename;
     ImageView imageView;
@@ -82,6 +83,7 @@ public class fwxq extends Activity {
         public void run() {
             uname = findViewById(R.id.fbr);
             intro = findViewById(R.id.fwjj);
+            dm = findViewById(R.id.demand);
             Http_fwxq httpconn = new Http_fwxq();
             String connectURL = "http://"+url.URL+"/fwxq.php";
             flag = httpconn.gotoConn(username,housename,connectURL);
@@ -89,8 +91,13 @@ public class fwxq extends Activity {
                 message=httpconn.result.split(",");
                 uname.setText("发布人:"+message[0]);
                 intro.setText("房屋简介:"+message[1]);
+                dm.setText("房屋要求:"+message[3]);
                 imgpath = "http://"+url.URL+"/"+message[2];
                 System.out.println(imgpath);
+                System.out.println("发布人："+message[0]);
+                System.out.println("简介："+message[1]);
+                System.out.println("大小："+message.length);
+                System.out.println("需求："+message[3]);
                 bitmap=getImage(imgpath);
             }else{
                 Looper.prepare();
