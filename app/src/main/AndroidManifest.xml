@@ -15,14 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fyfb"></activity>
+        <activity android:name=".myhome"></activity>
+        <activity android:name=".myhouse" />
+        <activity android:name=".fyfb" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".zfrz" />
         <activity android:name=".login2" />
         <activity android:name=".gr" />

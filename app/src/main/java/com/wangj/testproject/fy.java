@@ -31,6 +31,15 @@ public class fy extends AppCompatActivity {
 
             }
         });
+        Button bn2=(Button) findViewById(R.id.button9);
+        bn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Intent intent = new Intent(fy.this,myhouse.class);
+                startActivity(intent);
+
+            }
+        });
 //
 //        Button bn1=(Button) findViewById(R.id.button8);
 //        bn1.setOnClickListener(new View.OnClickListener() {
