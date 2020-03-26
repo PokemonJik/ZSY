@@ -12,14 +12,14 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Http_xqfbc {
+public class Http_homedelete {
     public String result="";
-
-    public int gotoConn(String name,String connectUrl){
+    public boolean gotoConn(String homename,String connectUrl){
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpRequest = new HttpPost(connectUrl);
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("name",name));
+        System.out.println("房间名"+homename+"\n");
+        params.add(new BasicNameValuePair("name",homename));
         try{
             httpRequest.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
             HttpResponse httpResponse = httpClient.execute(httpRequest);
@@ -30,11 +30,12 @@ public class Http_xqfbc {
         }
 
         if(result.equals("fail")){
-            return 0;
+            return false;
         }else{
-            return 1;
+            return true;
         }
 
 
     }
+
 }

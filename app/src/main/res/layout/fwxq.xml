@@ -75,7 +75,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="￥1000.00"
+            android:text="￥2000.00"
             android:textColor="#f00" />
 
         <TextView

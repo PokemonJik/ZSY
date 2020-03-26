@@ -46,6 +46,7 @@ public class fwxq extends Activity {
         String place = intent.getStringExtra("place");
         hname = findViewById(R.id.place);
         hname.setText("地址:"+place);
+        System.out.println("这里是fwxq\n");
         TextView jrgwc = findViewById(R.id.jrgwc);
         jrgwc.setOnClickListener(new View.OnClickListener() {
             @Override

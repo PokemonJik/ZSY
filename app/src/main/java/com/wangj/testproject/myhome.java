@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +28,12 @@ public class myhome extends Activity {
     public boolean flag=false;
     String message[]={};
     ArrayList list = new ArrayList<>();
-    TextView uname;
-    TextView hname;
-    TextView intro;
-    TextView dm;
-    String username;
-    String housename;
+    EditText hname;
+    EditText Place;
+    EditText intro;
+    EditText dm;
+    String username,place,introduction,demand;
+    String housename,oname,oplace;
     ImageView imageView;
     String imgpath;
     Bitmap bitmap;
@@ -39,30 +41,45 @@ public class myhome extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fwxq);
+        setContentView(R.layout.myhome);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         housename = intent.getStringExtra("housename");
         String place = intent.getStringExtra("place");
-        hname = findViewById(R.id.place);
-        hname.setText("地址:"+place);
-        TextView jrgwc = findViewById(R.id.jrgwc);
-        jrgwc.setOnClickListener(new View.OnClickListener() {
+        Place = findViewById(R.id.place);
+        Place.setText(place);
+        oplace=place;
+        oname=housename;
+        System.out.println("这里是myhome\n");
+
+        Button del=findViewById(R.id.delete);
+        del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View source) {
-                Thread thread = new Thread(runnablef);
+                Thread thread = new Thread(runnable2);
                 thread.start();
+                Intent intent = new Intent(myhome.this,myhouse.class);
+                startActivity(intent);
             }
         });
-
-//        TextView lxfbr = findViewById(R.id.lxfbr);
-//        lxfbr.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View source) {
-//                Thread thread = new Thread(runnablelx);
-//                thread.start();
-//            }
-//        });
+        Button Back=findViewById(R.id.back);
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Intent intent = new Intent(myhome.this,myhouse.class);
+                startActivity(intent);
+            }
+        });
+        Button update = findViewById(R.id.update);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Thread thread = new Thread(runnable3);
+                thread.start();
+                Intent intent = new Intent(myhome.this,myhouse.class);
+                startActivity(intent);
+            }
+        });
 
         ImageView imageView = findViewById(R.id.zf_pic);
 
@@ -81,7 +98,7 @@ public class myhome extends Activity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            uname = findViewById(R.id.fbr);
+            hname = findViewById(R.id.homename);
             intro = findViewById(R.id.fwjj);
             dm = findViewById(R.id.demand);
             Http_fwxq httpconn = new Http_fwxq();
@@ -89,15 +106,15 @@ public class myhome extends Activity {
             flag = httpconn.gotoConn(username,housename,connectURL);
             if(flag){
                 message=httpconn.result.split(",");
-                uname.setText("发布人:"+message[0]);
-                intro.setText("房屋简介:"+message[1]);
-                dm.setText("房屋要求:"+message[3]);
+                hname.setText(housename);
+                intro.setText(message[1]);
+                dm.setText(message[3]);
                 imgpath = "http://"+url.URL+"/"+message[2];
-                System.out.println(imgpath);
-                System.out.println("发布人："+message[0]);
-                System.out.println("简介："+message[1]);
-                System.out.println("大小："+message.length);
-                System.out.println("需求："+message[3]);
+//                System.out.println(imgpath);
+//                System.out.println("发布人："+message[0]);
+//                System.out.println("简介："+message[1]);
+//                System.out.println("大小："+message.length);
+//                System.out.println("需求："+message[3]);
                 bitmap=getImage(imgpath);
             }else{
                 Looper.prepare();
@@ -107,46 +124,55 @@ public class myhome extends Activity {
         }
 
     };
-    Runnable runnablef = new Runnable() {
+    Runnable runnable2 = new Runnable() {
         @Override
         public void run() {
-            Map<String,String>user = getuser_mes(myhome.this);
-            String own = user.get("username");
-            Http_fwxqf httpconn = new Http_fwxqf();
-            String connectURL = "http://"+url.URL+"/fwxqf.php";
-            flag = httpconn.gotoConn(own,username,housename,connectURL);
-            if (flag) {
+            Http_homedelete httpconn = new Http_homedelete();
+            String connectURL = "http://"+url.URL+"/homedelete.php";
+            flag = httpconn.gotoConn(housename,connectURL);
+            System.out.println("房间名"+housename+"\n");
+            if(flag){
                 Looper.prepare();
-                Toast.makeText(myhome.this,"加入购物车成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(myhome.this,"删除成功",Toast.LENGTH_SHORT).show();
                 Looper.loop();
-            } else {
+            }else{
                 Looper.prepare();
-                Toast.makeText(myhome.this, "查询失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(myhome.this,"删除失败",Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
         }
-    };
 
-//    Runnable runnablelx = new Runnable() {
-//        @Override
-//        public void run() {
-//            Map<String,String>user = getuser_mes(myhome.this);
-//            String own = user.get("username");
-//            Http_fwxqf httpconn = new Http_fwxqf();
-//            String connectURL = "http://"+url.URL+"/purchase.php";
-//            flag = httpconn.gotoConn(own,username,housename,connectURL);
-//            if (flag) {
-//                Looper.prepare();
-//                Toast.makeText(fwxq.this,"联系发布者",Toast.LENGTH_SHORT).show();
-//                Looper.loop();
-//            } else {
-//                Looper.prepare();
-//                Toast.makeText(fwxq.this, "联系发布者失败", Toast.LENGTH_SHORT).show();
-//                Looper.loop();
-//            }
-//
-//        }
-//    };
+    };
+    Runnable runnable3 = new Runnable() {
+        @Override
+        public void run() {
+            hname = findViewById(R.id.homename);
+            Place = findViewById(R.id.place);
+            intro = findViewById(R.id.fwjj);
+            dm = findViewById(R.id.demand);
+            place=Place.getText().toString();
+            introduction=intro.getText().toString();
+            demand=dm.getText().toString();
+            housename=hname.getText().toString();
+            System.out.println("房名："+housename);
+            System.out.println("地址："+place);
+            System.out.println("简介："+introduction);
+            System.out.println("要求："+demand);
+            Http_homeupdate httpconn = new Http_homeupdate();
+            String connectURL = "http://"+url.URL+"/homeupdate.php";
+            flag = httpconn.gotoConn(oname,oplace,housename,place,introduction,demand,connectURL);
+            if(flag){
+                Looper.prepare();
+                Toast.makeText(myhome.this,"修改成功",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }else{
+                Looper.prepare();
+                Toast.makeText(myhome.this,"修改失败",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }
+
+    };
 
     private Map<String,String> getuser_mes(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);

@@ -35,7 +35,7 @@ public class myhouse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myhouse);
-
+        System.out.println("这里是myhouse\n");
         Thread thread = new Thread(runnable);
         thread.start();
         lvProduct = (ListView) findViewById(R.id.mylist);
