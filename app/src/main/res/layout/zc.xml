@@ -8,85 +8,100 @@
     android:background = "@drawable/space"
     >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="61dp"
-        android:layout_height="58dp"
-        android:background="@drawable/round"
-        android:gravity="center"
-        android:text="账号"
-        android:textColor="#000"
-        android:textSize="20dp"
+<!--    <TextView-->
+<!--        android:id="@+id/textView1"-->
+<!--        android:layout_width="61dp"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:background="@drawable/round"-->
+<!--        android:gravity="center"-->
+<!--        android:text="账号"-->
+<!--        android:textColor="#000"-->
+<!--        android:textSize="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.091"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.249" />-->
+
+    <!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="61dp"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:background="@drawable/round"-->
+<!--        android:gravity="center"-->
+<!--        android:text="密码"-->
+<!--        android:textColor="#000"-->
+<!--        android:textSize="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.091"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.355" />-->
+    <LinearLayout
+        android:id="@+id/loginPanel"
+        android:layout_width="390dp"
+        android:layout_height="364dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/background_login_div"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.249" />
+        app:layout_constraintVertical_bias="0.498">
 
-    <EditText
-        android:id="@+id/et_account"
-        android:layout_width="279dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/textview_border"
-        android:hint="学信网账户"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/et_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.704"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821" />
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="279dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/textview_border"
+            android:hint="学信网账户"
+            android:inputType="number"
+            app:layout_constraintBottom_toTopOf="@+id/et_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.821" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="61dp"
-        android:layout_height="58dp"
-        android:background="@drawable/round"
-        android:gravity="center"
-        android:text="密码"
-        android:textColor="#000"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355" />
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="279dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/textview_border"
+            android:hint="学信网密码"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.362" />
 
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="279dp"
-        android:layout_height="58dp"
-        android:background="@drawable/textview_border"
-        android:hint="学信网密码"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.704"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355" />
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background_button_div"
+            android:text="注册"
+            android:textColor="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_password" />
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="注册"
-        android:background="#43AA9B"
-        app:layout_constraintTop_toBottomOf="@id/et_password"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="50dp"
-        android:textColor="#ffffff"
-        />
-    <Button
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:layout_gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/et_password"
         android:layout_marginTop="5dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -107,6 +122,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

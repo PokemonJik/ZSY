@@ -15,7 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".myhome"></activity>
+        <activity android:name=".result"></activity>
+        <activity
+            android:name=".search"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".myhome" />
         <activity android:name=".myhouse" />
         <activity android:name=".fyfb" />
         <activity android:name=".MainActivity">

@@ -6,4 +6,5 @@
     <string name="menu_sett">结算</string>
     <string name="action_settings">配置服务器</string>
     <string name="editTextString">192.168.169.166</string>
+    <string name="title_activity_search">search</string>
 </resources>

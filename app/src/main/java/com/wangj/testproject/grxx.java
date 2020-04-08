@@ -24,15 +24,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import com.spark.submitbutton.SubmitButton;
 
 public class grxx extends AppCompatActivity{
     ImageView imageView;
     public boolean flag=false;
     String message[]={};
-    String imgpath;
+    String imgpath,name;String sex,school;
     Bitmap bitmap;
     connectURL url = new connectURL();
-
+    int flag1=0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
@@ -51,9 +52,9 @@ public class grxx extends AppCompatActivity{
         String b = user.get("sex");
         String c = user.get("school");
 
-        EditText name = (EditText) findViewById(R.id.E1);
-        EditText sex = (EditText) findViewById(R.id.E2);
-        EditText school = (EditText) findViewById(R.id.E3);
+        EditText Name = (EditText) findViewById(R.id.E1);
+        EditText Sex = (EditText) findViewById(R.id.E2);
+        EditText School = (EditText) findViewById(R.id.E3);
 
         findViewById(R.id.gr2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +63,26 @@ public class grxx extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+        SubmitButton btn=(SubmitButton) findViewById(R.id.update);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread thread = new Thread(runnable2);
+                thread.start();
+                flag1=1;
+            }
+        });
+//
+//        if(flag1==1){
+//            try {
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            Intent intent = new Intent(grxx.this,gr.class);
+//            startActivity(intent);
+//
+//        }
 
         findViewById(R.id.tx).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +92,9 @@ public class grxx extends AppCompatActivity{
             }
         });
 
-        name.setText(a);
-        sex.setText(b);
-        school.setText(c);
+        Name.setText(a);
+        Sex.setText(b);
+        School.setText(c);
 
     }
 
@@ -101,7 +122,7 @@ public class grxx extends AppCompatActivity{
         public void run() {
             Http_getimg httpconn = new Http_getimg();
             Map<String,String>user = getuser_mes(grxx.this);
-            String own = user.get("username");
+            String own= user.get("username");
             String connectURL = "http://"+url.URL+"/getimg.php";
             Boolean flag = httpconn.gotoConn(own,connectURL);
             if(flag){
@@ -137,8 +158,40 @@ public class grxx extends AppCompatActivity{
             }
         }
     };
+    Runnable runnable2 = new Runnable() {
+        @Override
+        public void run() {
+            Http_grxx httpconn = new Http_grxx();
+            Map<String,String>user = getuser_mes(grxx.this);
+            String oname= user.get("username");
+            EditText e1,e2,e3;
+            e1=findViewById(R.id.E1);
+            e2=findViewById(R.id.E2);
+            e3=findViewById(R.id.E3);
 
 
+            name=e1.getText().toString();
+            sex=e2.getText().toString();
+            school=e3.getText().toString();
+            save_userMes(grxx.this,name,sex,school);
+            System.out.println("name:"+name);
+            System.out.println("sex:"+sex);
+            System.out.println("school:"+school);
+
+            String connectURL = "http://"+url.URL+"/grxx.php";
+            Boolean flag = httpconn.gotoConn(oname,name,sex,school,connectURL);
+        }
+    };
+
+    private boolean save_userMes(Context context,String name,String sex,String school){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username",name);
+        editor.putString("sex",sex);
+        editor.putString("school",school);
+        editor.commit();
+        return true;
+    }
     private Map<String,String> getuser_mes(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);

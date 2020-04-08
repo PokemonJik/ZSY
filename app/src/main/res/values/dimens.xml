@@ -18,5 +18,6 @@
     <dimen name="txt_24">24sp</dimen>
     <dimen name="txt_26">26sp</dimen>
     <dimen name="txt_28">28sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

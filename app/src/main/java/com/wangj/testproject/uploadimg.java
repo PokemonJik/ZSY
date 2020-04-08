@@ -46,6 +46,8 @@ import com.loopj.android.http.RequestParams;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -56,6 +58,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class uploadimg extends AppCompatActivity implements View.OnClickListener{
     public static final int TAKE_PHOTO = 1;
@@ -225,6 +228,7 @@ public class uploadimg extends AppCompatActivity implements View.OnClickListener
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.fromFile(new File(cachePath))));
 //                        imageView.setImageBitmap(bitmap);
                         sendImage(bitmap);
+                        saveMyBitmap(bitmap);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -282,7 +286,34 @@ public class uploadimg extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
+    Random random = new Random();
 
+    private void saveMyBitmap(Bitmap bitmap) {
+        String bitName = String.valueOf(random.nextInt(Integer.MAX_VALUE));
+        File file = new File("/sdcard/DCIM/Camera/" + bitName + ".jpg");
+        if (file.exists()) {
+            file.delete();
+        }
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(file);
+            if (bitmap.compress(Bitmap.CompressFormat.PNG, 90, out)) {
+                out.flush();
+                out.close();
+                //保存图片后发送广播通知更新数据库
+                // Uri uri = Uri.fromFile(file);
+                // sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri uri = Uri.fromFile(file);
+                intent.setData(uri);
+                this.sendBroadcast(intent);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
