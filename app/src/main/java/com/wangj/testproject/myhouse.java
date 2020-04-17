@@ -38,6 +38,8 @@ public class myhouse extends AppCompatActivity {
         System.out.println("这里是myhouse\n");
         Thread thread = new Thread(runnable);
         thread.start();
+        while(thread.isAlive()){
+        }
         lvProduct = (ListView) findViewById(R.id.mylist);
 
         final myhouse.ProductAdaptertj adapter = new myhouse.ProductAdaptertj(myhouse.this, (ArrayList<HashMap<String, String>>) list);

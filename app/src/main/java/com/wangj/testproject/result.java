@@ -38,7 +38,7 @@ public class result extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result);
-
+        getSupportActionBar().hide();
         Intent intent = getIntent();
         place=intent.getStringExtra("place");
         System.out.println(place);

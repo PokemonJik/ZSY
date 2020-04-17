@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/zf_pic"
         android:layout_width="match_parent"
-        android:layout_height="183dp" />
+        android:layout_height="252dp" />
 
     <View
         android:layout_width="fill_parent"

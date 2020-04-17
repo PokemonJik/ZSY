@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.refactor.lib.colordialog.ColorDialog;
+
 
 public class myhome extends Activity {
 
@@ -56,10 +58,29 @@ public class myhome extends Activity {
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View source) {
-                Thread thread = new Thread(runnable2);
-                thread.start();
-                Intent intent = new Intent(myhome.this,myhouse.class);
-                startActivity(intent);
+                ColorDialog dialog = new ColorDialog(source.getContext());
+                dialog.setTitle("删除提示：");
+                dialog.setContentText("       确认您要删除该发布信息吗？");
+                dialog.setColor("#2b4490");
+                dialog.setContentImage(getResources().getDrawable(R.drawable.pkq));
+                dialog.setPositiveListener("确定", new ColorDialog.OnPositiveListener() {
+                    @Override
+                    public void onClick(ColorDialog dialog) {
+                        Thread thread = new Thread(runnable2);
+                        thread.start();
+                        Intent intent = new Intent(myhome.this,myhouse.class);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                })
+                        .setNegativeListener("取消", new ColorDialog.OnNegativeListener() {
+                            @Override
+                            public void onClick(ColorDialog dialog) {
+                                Toast.makeText(myhome.this, dialog.getNegativeText().toString(), Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }).show();
+
             }
         });
         Button Back=findViewById(R.id.back);
@@ -74,10 +95,28 @@ public class myhome extends Activity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View source) {
-                Thread thread = new Thread(runnable3);
-                thread.start();
-                Intent intent = new Intent(myhome.this,myhouse.class);
-                startActivity(intent);
+                ColorDialog dialog = new ColorDialog(source.getContext());
+                dialog.setTitle("修改提示：");
+                dialog.setContentText("       确认您要修改该发布信息吗？");
+                dialog.setColor("#2b4490");
+                dialog.setContentImage(getResources().getDrawable(R.drawable.cat));
+                dialog.setPositiveListener("确定", new ColorDialog.OnPositiveListener() {
+                    @Override
+                    public void onClick(ColorDialog dialog) {
+                        Thread thread = new Thread(runnable3);
+                        thread.start();
+                        Intent intent = new Intent(myhome.this,myhouse.class);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                })
+                        .setNegativeListener("取消", new ColorDialog.OnNegativeListener() {
+                            @Override
+                            public void onClick(ColorDialog dialog) {
+                                Toast.makeText(myhome.this, dialog.getNegativeText().toString(), Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         });
 

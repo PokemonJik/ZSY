@@ -67,7 +67,8 @@ public class tj extends Activity implements OnPageChangeListener {
 
         Thread thread = new Thread(runnable);
         thread.start();
-
+        while(thread.isAlive()){
+        }
         ViewGroup group = (ViewGroup)findViewById(R.id.viewGroupf);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         lvProduct = (ListView) findViewById(R.id.tjlb);
