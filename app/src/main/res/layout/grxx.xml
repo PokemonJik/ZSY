@@ -174,6 +174,78 @@
                 android:paddingBottom="34dp"
                 android:src="@drawable/ic_more" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="个人介绍:"
+                android:textColor="#DB4E61"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/E4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                android:gravity="center_horizontal"
+                android:inputType="textMultiLine"
+                android:text="hello! my name is xxxx!"
+                android:textColor="#222020"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="需求:"
+                android:textColor="#DB4E61"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/E5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                android:gravity="center_horizontal"
+                android:inputType="textMultiLine"
+                android:text="我的要求是这样。。。。。。。。。。。。。。。懂了吗"
+                android:textColor="#222020"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
         >
 
 

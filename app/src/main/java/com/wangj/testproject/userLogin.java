@@ -52,9 +52,10 @@ public class userLogin extends AppCompatActivity {
         });
     }
 
-    private boolean save_userMes(Context context,String name,String sex,String school){
+    private boolean save_userMes(Context context,String id,String name,String sex,String school){
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("id",id);
         editor.putString("username",name);
         editor.putString("sex",sex);
         editor.putString("school",school);
@@ -67,10 +68,12 @@ public class userLogin extends AppCompatActivity {
         String username = sharedPreferences.getString("username",null);
         String sex = sharedPreferences.getString("sex",null);
         String school = sharedPreferences.getString("school",null);
+        String id = sharedPreferences.getString("id",null);
         Map<String,String>user = new HashMap<String,String>();
         user.put("username",username);
         user.put("sex",sex);
         user.put("school",school);
+        user.put("id",id);
         return user;
     }
 
@@ -86,7 +89,7 @@ public class userLogin extends AppCompatActivity {
             if(flag){
                 message=httpconn.result.split(",");
                 System.out.println(message[0]+message[1]+message[2]);
-                boolean savaflag = save_userMes(userLogin.this,message[0],message[1],message[2]);
+                boolean savaflag = save_userMes(userLogin.this,message[3],message[0],message[1],message[2]);
                 Map<String,String>user = getuser_mes(userLogin.this);
                 System.out.println(user.get("school"));
                 Intent intent = new Intent(userLogin.this,login2.class);

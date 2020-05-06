@@ -23,6 +23,16 @@ public class fy extends AppCompatActivity {
             }
         });
 
+        ImageButton back2=(ImageButton) findViewById(R.id.news);
+        back2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Intent intent = new Intent(fy.this,mymessage.class);
+                startActivity(intent);
+
+            }
+        });
+
         Button bn=(Button) findViewById(R.id.button7);
         bn.setOnClickListener(new View.OnClickListener() {
             @Override

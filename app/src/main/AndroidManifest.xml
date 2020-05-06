@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".result"></activity>
+        <activity android:name=".mymessage"></activity>
+        <activity android:name=".chat" />
+        <activity android:name=".result" />
         <activity
             android:name=".search"
             android:label="@string/title_activity_search"

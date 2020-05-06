@@ -12,12 +12,12 @@
 
         <ImageView
             android:id="@+id/zf_pic"
-            android:layout_width="95dp"
-            android:layout_height="66dp"
+            android:layout_width="87dp"
+            android:layout_height="80dp"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="15dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/tj1" />
+            android:src="@drawable/newview" />
 
         <RelativeLayout
             android:layout_width="281dp"
@@ -32,6 +32,7 @@
                 android:layout_marginRight="10dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:text="联系人："
                 android:textColor="@color/orange_color"
                 android:textSize="@dimen/txt_14"
                 android:textStyle="bold" />
@@ -75,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="房屋简介"
+                android:text="消息"
                 android:textColor="@color/orange_color"
                 android:textSize="@dimen/txt_14"
                 android:textStyle="bold" />

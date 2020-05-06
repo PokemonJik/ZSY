@@ -32,6 +32,7 @@ public class fwxq extends Activity {
     TextView dm;
     String username;
     String housename;
+    String hostid,id;
     ImageView imageView;
     String imgpath;
     Bitmap bitmap;
@@ -60,8 +61,17 @@ public class fwxq extends Activity {
         lxfbr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View source) {
-                Thread thread = new Thread(runnablelx);
-                thread.start();
+                Map<String,String>user = getuser_mes(fwxq.this);
+                String id = user.get("id");
+                if(hostid.equals(id)){
+                    Toast.makeText(fwxq.this,"不要和自己对话哦！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(fwxq.this,chat.class);
+                    intent.putExtra("hostid",hostid);
+                    intent.putExtra("myid",id);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -93,12 +103,14 @@ public class fwxq extends Activity {
                 uname.setText("发布人:"+message[0]);
                 intro.setText("房屋简介:"+message[1]);
                 dm.setText("房屋要求:"+message[3]);
+                hostid=message[4];
                 imgpath = "http://"+url.URL+"/"+message[2];
                 System.out.println(imgpath);
                 System.out.println("发布人："+message[0]);
                 System.out.println("简介："+message[1]);
                 System.out.println("大小："+message.length);
                 System.out.println("需求："+message[3]);
+                System.out.println("userid："+message[4]);
                 bitmap=getImage(imgpath);
             }else{
                 Looper.prepare();
@@ -128,36 +140,18 @@ public class fwxq extends Activity {
         }
     };
 
-    Runnable runnablelx = new Runnable() {
-        @Override
-        public void run() {
-            Map<String,String>user = getuser_mes(fwxq.this);
-            String own = user.get("username");
-            Http_fwxqf httpconn = new Http_fwxqf();
-            String connectURL = "http://"+url.URL+"/purchase.php";
-            flag = httpconn.gotoConn(own,username,housename,connectURL);
-            if (flag) {
-                Looper.prepare();
-                Toast.makeText(fwxq.this,"联系发布者",Toast.LENGTH_SHORT).show();
-                Looper.loop();
-            } else {
-                Looper.prepare();
-                Toast.makeText(fwxq.this, "联系发布者失败", Toast.LENGTH_SHORT).show();
-                Looper.loop();
-            }
 
-        }
-    };
-
-    private Map<String,String> getuser_mes(Context context){
+    private Map<String,String>getuser_mes(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);
         String sex = sharedPreferences.getString("sex",null);
         String school = sharedPreferences.getString("school",null);
+        String id = sharedPreferences.getString("id",null);
         Map<String,String>user = new HashMap<String,String>();
         user.put("username",username);
         user.put("sex",sex);
         user.put("school",school);
+        user.put("id",id);
         return user;
     }
 

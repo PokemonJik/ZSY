@@ -31,12 +31,13 @@
             android:textSize="20sp"/>
 
         <ImageButton
+            android:id="@+id/news"
             android:scaleType="fitCenter"
             android:padding="13dp"
             android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_menubar_share"
+            android:src="@drawable/news"
             android:layout_width="55dp"
             android:layout_height="55dp"/>
     </RelativeLayout>

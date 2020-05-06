@@ -53,6 +53,7 @@ public class tj extends Activity implements OnPageChangeListener {
 
 
     ListView lvProduct;
+
     public boolean flag=false;
     String message[]={};
     ArrayList list = new ArrayList<>();
@@ -192,11 +193,11 @@ public class tj extends Activity implements OnPageChangeListener {
             return convertView;
         }
 
-        private static class ViewHolder {
-            private TextView tvName;
-            private TextView tvhousename;
-            private TextView tvplace;
-            private ImageView tvpic;
+        static class ViewHolder {
+            public TextView tvName;
+            public TextView tvhousename;
+            public TextView tvplace;
+            public ImageView tvpic;
         }
 
         Runnable runnable = new Runnable() {
