@@ -75,6 +75,22 @@ public class fwxq extends Activity {
             }
         });
 
+        TextView sqhz = findViewById(R.id.sqhz);
+        sqhz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Map<String,String>user = getuser_mes(fwxq.this);
+                String id = user.get("id");
+                if(hostid.equals(id)){
+                    Toast.makeText(fwxq.this,"不要和自己对话哦！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Thread thread = new Thread(runnablesq);
+                    thread.start();
+                }
+
+            }
+        });
+
         ImageView imageView = findViewById(R.id.zf_pic);
 
         Thread thread = new Thread(runnable);
@@ -135,6 +151,26 @@ public class fwxq extends Activity {
             } else {
                 Looper.prepare();
                 Toast.makeText(fwxq.this, "查询失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }
+    };
+
+    Runnable runnablesq = new Runnable() {
+        @Override
+        public void run() {
+            Map<String,String>user = getuser_mes(fwxq.this);
+            String id = user.get("id");
+            Http_sqhz httpconn = new Http_sqhz();
+            String connectURL = "http://"+url.URL+"/sqhz.php";
+            flag = httpconn.gotoConn(hostid,housename,id,connectURL);
+            if (flag) {
+                Looper.prepare();
+                Toast.makeText(fwxq.this,"申请合租成功",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            } else {
+                Looper.prepare();
+                Toast.makeText(fwxq.this, "申请合租失败", Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
         }

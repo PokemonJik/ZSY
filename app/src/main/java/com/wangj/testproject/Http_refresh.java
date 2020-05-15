@@ -12,19 +12,18 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Http_getimg {
+public class Http_refresh {
     public String result="";
-
-    public boolean gotoConn(String id,String connectUrl){
+    public boolean gotoConn(String oname,String oplace,String connectUrl){
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpRequest = new HttpPost(connectUrl);
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("id",id));
+        params.add(new BasicNameValuePair("oname",oname));
+        params.add(new BasicNameValuePair("oplace",oplace));
         try{
             httpRequest.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
             HttpResponse httpResponse = httpClient.execute(httpRequest);
             result = EntityUtils.toString(httpResponse.getEntity(),"utf-8");
-            System.out.println("1");
             System.out.println("1"+result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,7 +34,5 @@ public class Http_getimg {
         }else{
             return true;
         }
-
-
     }
 }

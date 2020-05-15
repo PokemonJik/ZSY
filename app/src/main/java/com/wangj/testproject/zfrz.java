@@ -21,7 +21,8 @@ public class zfrz extends AppCompatActivity {
     ListView lvProduct;
     public boolean flag=false;
     String username;
-    String message[]={};
+    String message1[]={};
+    String message2[]={};
     ArrayList list = new ArrayList<>();
     connectURL url = new connectURL();
 
@@ -38,6 +39,9 @@ public class zfrz extends AppCompatActivity {
 
         Thread thread = new Thread(runnable);
         thread.start();
+
+        while(thread.isAlive()){
+        }
 
 
 
@@ -107,9 +111,9 @@ public class zfrz extends AppCompatActivity {
             }
 
             HashMap<String, String> map = list.get(position);
-            holder.tvName.setText(map.get("name"));
-            holder.tvDescribe.setText(map.get("describe"));
-            holder.tvPrice.setText(map.get("price"));
+            holder.tvName.setText("房屋名:"+map.get("name"));
+            holder.tvDescribe.setText("合租发起人:"+map.get("describe"));
+            holder.tvPrice.setText("室友:"+map.get("price"));
 
             return convertView;
         }
@@ -142,21 +146,25 @@ public class zfrz extends AppCompatActivity {
             String connectURL = "http://"+url.URL+"/zfrz.php";
             flag = httpconn.gotoConn(username,connectURL);
             if(flag){
-                message=httpconn.result.split(",");
-                for(int i=0;i<message.length;i++) {
+                message1=httpconn.result.split("/");
+                for(int i=0;i<message1.length;i++) {
+                    int j=0;
+                    message2=message1[i].split(",");
                     Map<String,String> record = new HashMap<String,String>();
-                    record.put("name","合租记录");
-                    record.put("describe",message[i]);
-                    i++;
-                    record.put("price",message[i]);
+                    record.put("name",message2[j]);//房屋人
+                    j++;
+                    record.put("describe",message2[j]);//房屋名
+                    j++;
+                    record.put("price",message2[j]);//合租室友
                     list.add(record);
                 }
             }else{
-                Looper.prepare();
-                Toast.makeText(zfrz.this,"查询失败",Toast.LENGTH_SHORT).show();
-                Looper.loop();
+//                Looper.prepare();
+//                Toast.makeText(zfrz.this,"查询失败",Toast.LENGTH_SHORT).show();
+//                Looper.loop();
             }
 
         }
     };
 }
+

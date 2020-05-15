@@ -33,4 +33,5 @@ dependencies {
     implementation files('libs/android-async-http-1.4.6.jar')
     implementation 'me.spark:submitbutton:1.0.1'
     implementation 'com.github.andyxialm:ColorDialog:1.0.0'
+    implementation files('libs/BaiduLBS_Android.jar')
 }

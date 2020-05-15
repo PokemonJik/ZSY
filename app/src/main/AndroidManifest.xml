@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".mymessage"></activity>
+        <activity android:name=".information"></activity>
+        <activity android:name=".mymessage" />
         <activity android:name=".chat" />
         <activity android:name=".result" />
         <activity
@@ -43,6 +44,7 @@
         <activity android:name=".xqfb" />
         <activity android:name=".gwc" />
         <activity android:name=".fwxq" />
+        <activity android:name=".select" />
         <activity
             android:name=".fyuploadimg"
             android:theme="@style/MyToolsAddAvatar" />

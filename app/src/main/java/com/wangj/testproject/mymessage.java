@@ -48,8 +48,15 @@ public class mymessage extends AppCompatActivity {
                 zc = (Map<String, String>) list.get(position);
                 System.out.println("map大小："+zc.size());
                 Intent intent = new Intent(mymessage.this,chat.class);
-                intent.putExtra("hostid",my_id);
-                intent.putExtra("myid",zc.get("customer_id"));
+                String flag=zc.get("flag");
+                if(flag.equals("1")){
+                    intent.putExtra("hostid",my_id);
+                    intent.putExtra("myid",zc.get("customer_id"));
+                }else{
+                    intent.putExtra("hostid",zc.get("customer_id"));
+                    intent.putExtra("myid",my_id);
+                }
+
                 startActivity(intent);
             }
         });
@@ -88,6 +95,8 @@ public class mymessage extends AppCompatActivity {
                     record.put("customer_id",message[i]);
                     i++;
                     record.put("name",message[i]);
+                    i++;
+                    record.put("flag",message[i]);
                     list.add(record);
                 }
             }
@@ -152,7 +161,9 @@ public class mymessage extends AppCompatActivity {
             }
 
             HashMap<String, String> map = list.get(position);
-            holder.tvplace.setText(map.get("name"));
+            String flag=map.get("flag");
+            if(flag.equals("1"))holder.tvplace.setText("客人： "+map.get("name"));
+            else holder.tvplace.setText("房东： "+map.get("name"));
             return convertView;
         }
 

@@ -192,9 +192,9 @@ public class myhouse extends AppCompatActivity {
                     list.add(record);
                 }
             }else{
-                Looper.prepare();
-                Toast.makeText(myhouse.this,"查询失败",Toast.LENGTH_SHORT).show();
-                Looper.loop();
+//                Looper.prepare();
+//                Toast.makeText(myhouse.this,"查询失败",Toast.LENGTH_SHORT).show();
+//                Looper.loop();
             }
 
         }

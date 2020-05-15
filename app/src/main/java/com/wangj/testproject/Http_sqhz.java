@@ -12,14 +12,16 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Http_getimg {
+public class Http_sqhz {
     public String result="";
 
-    public boolean gotoConn(String id,String connectUrl){
+    public boolean gotoConn(String hostid,String housename, String myuid, String connectUrl){
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpRequest = new HttpPost(connectUrl);
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("id",id));
+        params.add(new BasicNameValuePair("hostid",hostid));
+        params.add(new BasicNameValuePair("housename",housename));
+        params.add(new BasicNameValuePair("myuid",myuid));
         try{
             httpRequest.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
             HttpResponse httpResponse = httpClient.execute(httpRequest);

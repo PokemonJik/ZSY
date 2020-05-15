@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/fbr1"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="42dp"
             android:text="房间名："
             android:textSize="26sp" />
@@ -47,7 +47,7 @@
         <EditText
             android:id="@+id/homename"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="45dp"
             android:background="@drawable/editor_style"
             android:inputType="textMultiLine"
             android:textSize="26sp" />
@@ -87,7 +87,7 @@
     <EditText
         android:id="@+id/fwjj"
         android:layout_width="match_parent"
-        android:layout_height="106dp"
+        android:layout_height="88dp"
         android:background="@drawable/editor_style"
         android:inputType="textMultiLine"
         android:textSize="26sp" />
@@ -102,7 +102,7 @@
     <EditText
         android:id="@+id/demand"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="90dp"
         android:background="@drawable/editor_style"
         android:inputType="textMultiLine"
         android:textSize="26sp" />
@@ -133,8 +133,28 @@
             android:textColor="#f00" />
 
         <Button
+            android:id="@+id/finish"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="#f00" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="刷新"
+            android:textColor="#f00" />
+
+        <Button
             android:id="@+id/update"
-            android:layout_width="193dp"
+            android:layout_width="107dp"
             android:layout_height="38dp"
             android:layout_marginLeft="10dp"
             android:background="#ff0000"

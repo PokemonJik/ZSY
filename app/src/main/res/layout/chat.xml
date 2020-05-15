@@ -7,6 +7,44 @@
     android:orientation="vertical"
     android:background="@drawable/chatimg"
     tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#5682CF">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@android:color/transparent"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_title_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/back"
+            android:gravity="center_vertical"
+            android:text="聊天室"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+
+        <ImageButton
+            android:id="@+id/information"
+            android:scaleType="fitCenter"
+            android:padding="13dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/person"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+    </RelativeLayout>
+
+
+
     <ListView
         android:id="@+id/word"
         android:layout_width="match_parent"

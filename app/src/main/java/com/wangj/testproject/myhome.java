@@ -120,6 +120,28 @@ public class myhome extends Activity {
             }
         });
 
+        Button finish = findViewById(R.id.finish);
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Intent intent = new Intent(myhome.this,select.class);
+                intent.putExtra("housename",housename);
+                startActivity(intent);
+            }
+        });
+
+        Button refresh = findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Thread thread = new Thread(runnable4);
+                thread.start();
+                Intent intent = new Intent(myhome.this,myhouse.class);
+                startActivity(intent);
+
+            }
+        });
+
         ImageView imageView = findViewById(R.id.zf_pic);
 
         Thread thread = new Thread(runnable);
@@ -156,9 +178,9 @@ public class myhome extends Activity {
 //                System.out.println("需求："+message[3]);
                 bitmap=getImage(imgpath);
             }else{
-                Looper.prepare();
-                Toast.makeText(myhome.this,"查询失败",Toast.LENGTH_SHORT).show();
-                Looper.loop();
+//                Looper.prepare();
+//                Toast.makeText(myhome.this,"查询失败",Toast.LENGTH_SHORT).show();
+//                Looper.loop();
             }
         }
 
@@ -207,6 +229,26 @@ public class myhome extends Activity {
             }else{
                 Looper.prepare();
                 Toast.makeText(myhome.this,"修改失败",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }
+
+    };
+
+    Runnable runnable4 = new Runnable() {
+        @Override
+        public void run() {
+            Http_refresh httpconn = new Http_refresh();
+            String connectURL = "http://"+url.URL+"/refresh.php";
+            flag = httpconn.gotoConn(oname,oplace,connectURL);
+            System.out.println("房间名"+housename+"\n");
+            if(flag){
+                Looper.prepare();
+                Toast.makeText(myhome.this,"刷新成功",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }else{
+                Looper.prepare();
+                Toast.makeText(myhome.this,"刷新失败",Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
         }

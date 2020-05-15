@@ -31,13 +31,13 @@ public class result extends AppCompatActivity {
     String username;
     String housename,place;
     ImageView imageView;
-    String imgpath;
+    String imgpath,hostid;
     Bitmap bitmap;
     connectURL url = new connectURL();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.result);
+        setContentView(R.layout.fwxq);
         getSupportActionBar().hide();
         Intent intent = getIntent();
         place=intent.getStringExtra("place");
@@ -58,8 +58,34 @@ public class result extends AppCompatActivity {
         lxfbr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View source) {
-                Thread thread = new Thread(runnablelx);
-                thread.start();
+                Map<String,String>user = getuser_mes(result.this);
+                String id = user.get("id");
+                if(hostid.equals(id)){
+                    Toast.makeText(result.this,"不要和自己对话哦！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(result.this,chat.class);
+                    intent.putExtra("hostid",hostid);
+                    intent.putExtra("myid",id);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
+        TextView sqhz = findViewById(R.id.sqhz);
+        sqhz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Map<String,String>user = getuser_mes(result.this);
+                String id = user.get("id");
+                if(hostid.equals(id)){
+                    Toast.makeText(result.this,"不要和自己对话哦！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Thread thread = new Thread(runnablesq);
+                    thread.start();
+                }
+
             }
         });
 
@@ -91,7 +117,9 @@ public class result extends AppCompatActivity {
                 uname.setText("发布人:"+message[0]);
                 intro.setText("房屋简介:"+message[1]);
                 dm.setText("房屋要求:"+message[3]);
+                username=message[0];
                 housename=message[4];
+                hostid=message[5];
                 imgpath = "http://"+url.URL+"/"+message[2];
                 System.out.println(imgpath);
                 System.out.println("发布人："+message[0]);
@@ -110,11 +138,12 @@ public class result extends AppCompatActivity {
     Runnable runnablef = new Runnable() {
         @Override
         public void run() {
-            Map<String,String> user = getuser_mes(result.this);
+            Map<String,String>user = getuser_mes(result.this);
             String own = user.get("username");
             Http_fwxqf httpconn = new Http_fwxqf();
             String connectURL = "http://"+url.URL+"/fwxqf.php";
-            flag = httpconn.gotoConn(own,own,housename,connectURL);
+            flag = httpconn.gotoConn(own,username,housename,connectURL);
+            System.out.println();
             if (flag) {
                 Looper.prepare();
                 Toast.makeText(result.this,"加入购物车成功",Toast.LENGTH_SHORT).show();
@@ -126,37 +155,37 @@ public class result extends AppCompatActivity {
             }
         }
     };
-
-    Runnable runnablelx = new Runnable() {
+    Runnable runnablesq = new Runnable() {
         @Override
         public void run() {
             Map<String,String>user = getuser_mes(result.this);
-            String own = user.get("username");
-            Http_fwxqf httpconn = new Http_fwxqf();
-            String connectURL = "http://"+url.URL+"/purchase.php";
-            flag = httpconn.gotoConn(own,username,housename,connectURL);
+            String id = user.get("id");
+            Http_sqhz httpconn = new Http_sqhz();
+            String connectURL = "http://"+url.URL+"/sqhz.php";
+            flag = httpconn.gotoConn(hostid,housename,id,connectURL);
             if (flag) {
                 Looper.prepare();
-                Toast.makeText(result.this,"联系发布者",Toast.LENGTH_SHORT).show();
+                Toast.makeText(result.this,"申请合租成功",Toast.LENGTH_SHORT).show();
                 Looper.loop();
             } else {
                 Looper.prepare();
-                Toast.makeText(result.this, "联系发布者失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(result.this, "申请合租失败", Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
-
         }
     };
 
-    private Map<String,String> getuser_mes(Context context){
+    private Map<String,String>getuser_mes(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);
         String sex = sharedPreferences.getString("sex",null);
         String school = sharedPreferences.getString("school",null);
+        String id = sharedPreferences.getString("id",null);
         Map<String,String>user = new HashMap<String,String>();
         user.put("username",username);
         user.put("sex",sex);
         user.put("school",school);
+        user.put("id",id);
         return user;
     }
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class chat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
-        Intent intent=getIntent();
+        final Intent intent=getIntent();
         customerid=intent.getStringExtra("myid");
         hostid=intent.getStringExtra("hostid");
         System.out.println("这里是chat，myid："+customerid);
@@ -52,6 +53,24 @@ public class chat extends AppCompatActivity {
         thread2.start();
         while(thread2.isAlive()){
         }
+
+        ImageButton p=(ImageButton)findViewById(R.id.information);
+        p.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View source) {
+                Intent intent = new Intent(chat.this,information.class);
+                Map<String,String>user = getuser_mes(chat.this);
+                String id=user.get("id");
+                intent.putExtra("customerid",customerid);
+                intent.putExtra("hostid",hostid);
+                if(id.equals(hostid)){
+                    intent.putExtra("id",customerid);
+                }else {
+                    intent.putExtra("id", hostid);
+                }
+                startActivity(intent);
+            }
+        });
         lvProduct = (ListView) findViewById(R.id.word);
         final ProductAdaptertj adapter = new ProductAdaptertj(chat.this, (ArrayList<HashMap<String, String>>) list);
         lvProduct.setAdapter(adapter);

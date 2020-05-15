@@ -32,11 +32,11 @@ import com.spark.submitbutton.SubmitButton;
 
 import cn.refactor.lib.colordialog.PromptDialog;
 
-public class grxx extends AppCompatActivity{
+public class information extends AppCompatActivity{
     ImageView imageView;
 
     String message[]={};
-    String imgpath,name;String sex,school,introduce,demand,id;
+    String imgpath,name;String sex,school,introduce,demand,id,hostid,customerid;
     Bitmap bitmap;
     connectURL url = new connectURL();
 
@@ -50,8 +50,11 @@ public class grxx extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.grxx);
-
+        setContentView(R.layout.information);
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        hostid=intent.getStringExtra("hostid");
+        customerid=intent.getStringExtra("customerid");
         imageView = findViewById(R.id.tx);
         Thread thread = new Thread(runnable);
         thread.start();
@@ -65,9 +68,6 @@ public class grxx extends AppCompatActivity{
         }
         imageView.setImageBitmap(bitmap);
         initView();
-        Map<String,String>user = getuser_mes(grxx.this);
-        id=user.get("id");
-
         EditText Name = (EditText) findViewById(R.id.E1);
         EditText Sex = (EditText) findViewById(R.id.E2);
         EditText School = (EditText) findViewById(R.id.E3);
@@ -76,39 +76,23 @@ public class grxx extends AppCompatActivity{
         findViewById(R.id.gr2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(grxx.this,gr.class);
+                Intent intent = new Intent(information.this,chat.class);
+                intent.putExtra("hostid",hostid);
+                intent.putExtra("myid",customerid);
                 startActivity(intent);
-            }
-        });
-        SubmitButton btn=(SubmitButton) findViewById(R.id.update);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Thread thread = new Thread(runnable2);
-                thread.start();
-                new PromptDialog(v.getContext())
-                        .setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS)
-                        .setAnimationEnable(true)
-                        .setTitleText("修改成功！")
-                        .setContentText("您的修改已经处理，感谢使用“找舍友”app！！！")
-                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                            @Override
-                            public void onClick(PromptDialog dialog) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-                flag1=1;
             }
         });
 
 
-        findViewById(R.id.tx).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(grxx.this,uploadimg.class);
-                startActivity(intent);
-            }
-        });
+
+
+//        findViewById(R.id.tx).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(grxx.this,uploadimg.class);
+//                startActivity(intent);
+//            }
+//        });
 
         Name.setText(name);
         Sex.setText(sex);
@@ -138,8 +122,6 @@ public class grxx extends AppCompatActivity{
     Runnable rundemand = new Runnable() {
         @Override
         public void run() {
-            Map<String,String>user = getuser_mes(grxx.this);
-            id=user.get("id");
             Http_getdemand httpconn = new Http_getdemand();
 
             String connectURL = "http://"+url.URL+"/demand.php";
@@ -160,8 +142,6 @@ public class grxx extends AppCompatActivity{
         public void run() {
 
             Http_getimg httpconn = new Http_getimg();
-            Map<String,String>user = getuser_mes(grxx.this);
-            id=user.get("id");
             String connectURL = "http://"+url.URL+"/getimg.php";
             Boolean flag = httpconn.gotoConn(id,connectURL);
             if(flag){
@@ -197,46 +177,7 @@ public class grxx extends AppCompatActivity{
             }
         }
     };
-    Runnable runnable2 = new Runnable() {
-        @Override
-        public void run() {
-            Http_grxx httpconn = new Http_grxx();
-            Map<String,String>user = getuser_mes(grxx.this);
-            String oname= user.get("username");
-            EditText e1,e2,e3,e4,e5;
 
-            e1=findViewById(R.id.E1);
-            e2=findViewById(R.id.E2);
-            e3=findViewById(R.id.E3);
-            e4=findViewById(R.id.E4);
-            e5=findViewById(R.id.E5);
-            name=e1.getText().toString();
-            sex=e2.getText().toString();
-            school=e3.getText().toString();
-            introduce=e4.getText().toString();
-            demand=e5.getText().toString();
-            save_userMes(grxx.this,id,name,sex,school);
-
-
-            System.out.println("name:"+name);
-            System.out.println("sex:"+sex);
-            System.out.println("school:"+school);
-
-            String connectURL = "http://"+url.URL+"/grxx.php";
-            Boolean flag = httpconn.gotoConn(id,name,sex,school,introduce,demand,connectURL);
-        }
-    };
-
-    private boolean save_userMes(Context context,String id,String name,String sex,String school){
-        SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("id",id);
-        editor.putString("username",name);
-        editor.putString("sex",sex);
-        editor.putString("school",school);
-        editor.commit();
-        return true;
-    }
     private Map<String,String>getuser_mes(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_mes",MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);

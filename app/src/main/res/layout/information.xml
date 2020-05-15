@@ -266,21 +266,6 @@
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
             android:background="#CCCCCC"></View>
-        <com.spark.submitbutton.SubmitButton
-            android:id="@+id/update"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="提交修改"
-            android:textColor="@color/gray"
-            android:textSize="12sp"
-            app:sub_btn_background="@color/white"
-            app:sub_btn_duration="2000"
-            app:sub_btn_line_color="@color/colorPrimary"
-            app:sub_btn_ripple_color="@color/colorPrimary"
-            app:sub_btn_tick_color="@color/white"
-            android:layout_gravity="center_horizontal"
-            />
-
 
     </LinearLayout>
 

@@ -12,30 +12,29 @@ import org.apache.http.util.EntityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Http_getimg {
-    public String result="";
+public class Http_select {
+    public String result = "";
 
-    public boolean gotoConn(String id,String connectUrl){
+    public boolean gotoConn(String uid, String housename , String connectUrl) {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpRequest = new HttpPost(connectUrl);
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("id",id));
-        try{
-            httpRequest.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
+        params.add(new BasicNameValuePair("myuid", uid));
+        params.add(new BasicNameValuePair("housename", housename));
+        try {
+            httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
             HttpResponse httpResponse = httpClient.execute(httpRequest);
-            result = EntityUtils.toString(httpResponse.getEntity(),"utf-8");
+            result = EntityUtils.toString(httpResponse.getEntity(), "utf-8");
             System.out.println("1");
-            System.out.println("1"+result);
+            System.out.println("1" + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(result.equals("fail")){
+        if (result.equals("fail")) {
             return false;
-        }else{
+        } else {
             return true;
         }
-
-
     }
 }

@@ -87,12 +87,15 @@ public class gr extends AppCompatActivity {
         String username = sharedPreferences.getString("username",null);
         String sex = sharedPreferences.getString("sex",null);
         String school = sharedPreferences.getString("school",null);
+        String id = sharedPreferences.getString("id",null);
         Map<String,String>user = new HashMap<String,String>();
         user.put("username",username);
         user.put("sex",sex);
         user.put("school",school);
+        user.put("id",id);
         return user;
     }
+
 
     public static Bitmap getImage(String path){
 
@@ -118,9 +121,9 @@ public class gr extends AppCompatActivity {
         public void run() {
             Http_getimg httpconn = new Http_getimg();
             Map<String,String>user = getuser_mes(gr.this);
-            String own = user.get("username");
+            String id = user.get("id");
             String connectURL = "http://"+url.URL+"/getimg.php";
-            Boolean flag = httpconn.gotoConn(own,connectURL);
+            Boolean flag = httpconn.gotoConn(id,connectURL);
             if(flag){
                 message=httpconn.result.split(",");
                 System.out.println(message[0]);
